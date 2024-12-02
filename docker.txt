@@ -1,0 +1,1 @@
+sudo docker run --name PostgreSQL-CICLISMO -p 5433:5432 -e POSTGRES_DB=ciclismo -e POSTGRES_USER=ciclismo -e POSTGRES_PASSWORD=ciclismoSimarro -v ./sql:/var/lib/postgresql/data -d postgres:17.0
