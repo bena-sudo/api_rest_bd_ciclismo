@@ -1,5 +1,6 @@
 package edu.alumno.joan.api_rest_bd_ciclismo.model.db;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -18,23 +19,29 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "Equipo")
-public class EquipoDb {
+@Table(name = "Ciclista")
+public class CiclistaDB {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombree", nullable = false)
+    @Column(name = "nombrec", nullable = false)
     private String nombre;
 
     @Column(name = "nacion", nullable = false)
     private String nacion;
 
-    @Column(name = "direct", nullable = false)
-    private String director;
+    @Column(name = "fnac", nullable = false)
+    private LocalDate fechaNacimiento;
 
-    @OneToMany(mappedBy = "equipo", cascade = CascadeType.ALL)
-    private List<PerteneceDb> ciclistas;
+    @OneToMany(mappedBy = "ciclista", cascade = CascadeType.ALL)
+    private List<PerteneceDB> equipos;
+
+    @OneToMany(mappedBy = "ciclista", cascade = CascadeType.ALL)
+    private List<GanaDB> pruebasGanadas;
+
+    @OneToMany(mappedBy = "ciclista", cascade = CascadeType.ALL)
+    private List<ParticipaDB> participaciones;
 
 }

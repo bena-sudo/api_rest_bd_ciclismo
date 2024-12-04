@@ -1,11 +1,17 @@
 package edu.alumno.joan.api_rest_bd_ciclismo.model.db;
 
-import jakarta.persistence.*;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,9 +36,9 @@ public class PruebaDb {
     private double kilometros;
 
     @OneToMany(mappedBy = "prueba", cascade = CascadeType.ALL)
-    private List<GanaDb> ganadores;
+    private List<GanaDB> ganadores;
 
     @OneToMany(mappedBy = "prueba", cascade = CascadeType.ALL)
-    private List<ParticipaDb> participantes;
+    private List<ParticipaDB> participantes;
 
 }

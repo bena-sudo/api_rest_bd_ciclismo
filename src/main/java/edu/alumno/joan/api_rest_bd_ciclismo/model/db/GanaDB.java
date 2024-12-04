@@ -1,8 +1,5 @@
 package edu.alumno.joan.api_rest_bd_ciclismo.model.db;
 
-import java.time.LocalDate;
-
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,26 +15,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "Pertenece")
-public class PerteneceDb {
+@Table(name = "Gana")
+public class GanaDB {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "inicio", nullable = false)
-    private LocalDate inicio;
-
-    @Column(name = "fin")
-    private LocalDate fin;
-
     @ManyToOne
     @JoinColumn(name = "ciclista_id", nullable = false)
-    private CiclistaDb ciclista;
+    private CiclistaDB ciclista;
 
     @ManyToOne
-    @JoinColumn(name = "equipo_id", nullable = false)
-    private EquipoDb equipo;
+    @JoinColumn(name = "prueba_id", nullable = false)
+    private PruebaDb prueba;
 
-    // Getters y setters
 }
