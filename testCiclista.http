@@ -1,0 +1,23 @@
+## Obtener lista de ciclistas
+GET http://localhost:8090/api/v1/ciclistas
+Content-Type: application/json
+
+###
+
+## Obtener ciclistas ordenados de forma descendente
+GET http://localhost:8090/api/v1/ciclistas/orden/desc
+Content-Type: application/json
+
+###
+
+## Obtener ciclista por ID
+GET http://localhost:8090/api/v1/ciclistas/1/info
+Content-Type: application/json
+
+###
+
+## Obtener ciclistas ordenados por nombre de forma descendente
+GET http://localhost:8090/api/v1/ciclistas/nombre/J/orden/desc
+Content-Type: application/json
+
+###

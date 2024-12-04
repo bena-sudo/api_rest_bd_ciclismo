@@ -32,7 +32,7 @@ public class ParticipaDB {
 
     @ManyToOne
     @JoinColumn(name = "prueba_id", nullable = false)
-    private PruebaDb prueba;
+    private PruebaDB prueba;
 
     // Getters y setters
 }
