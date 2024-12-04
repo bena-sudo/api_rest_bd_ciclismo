@@ -1,0 +1,23 @@
+## Obtener lista de equipos
+GET http://localhost:8090/api/v1/equipos
+Content-Type: application/json
+
+###
+
+## Obtener equipos ordenados de forma descendente
+GET http://localhost:8090/api/v1/equipos/orden/desc
+Content-Type: application/json
+
+###
+
+## Obtener equipo por ID
+GET http://localhost:8090/api/v1/equipos/1/info
+Content-Type: application/json
+
+###
+
+## Obtener equipos ordenados por nombre de forma descendente
+GET http://localhost:8090/api/v1/equipos/nombre/ar/orden/desc
+Content-Type: application/json
+
+###
