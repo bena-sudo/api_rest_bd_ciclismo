@@ -89,4 +89,13 @@ public class EquipoServiceImpl implements EquipoService {
                 EquipoMapper.INSTANCE.equiposToEquipoListDTOs(paginaEquipos.getContent()),
                 paginaEquipos.getSort());
     }
+
+    public boolean deleteEquipoById(Long id) {
+        if (equipoRepository.existsById(id)) {
+            equipoRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

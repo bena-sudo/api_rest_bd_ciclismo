@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,5 +74,16 @@ public class EquipoRestController {
             @PathVariable("nombre") String nombre,
             @PathVariable("direccionOrden") String direccionOrden) {
         return equipoService.findAllEquiposByNombre(nombre, Sort.by(Direction.fromString(direccionOrden), "nombre"));
+    }
+
+    @DeleteMapping("/equipos/{id}")
+    public ResponseEntity<String> deleteCiclistaById(@PathVariable("id") Long id) {
+        boolean isDeleted = equipoService.deleteEquipoById(id);
+        
+        if (isDeleted) {
+            return ResponseEntity.ok("Equipo eliminado correctamente");
+        } else {
+            return ResponseEntity.status(404).body("Equipo no encontrado");
+        }
     }
 }

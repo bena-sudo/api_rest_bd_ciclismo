@@ -25,4 +25,6 @@ public interface EquipoService {
     PaginaDTO<EquipoListDTO> findByNombreContaining(String nombre, Pageable paging);
 
     PaginaDTO<EquipoListDTO> findAll(List<FiltroBusqueda> listaFiltros, Pageable paging);
+
+    boolean deleteEquipoById(Long id);
 }

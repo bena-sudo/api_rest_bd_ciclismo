@@ -1,59 +1,12 @@
--- Tabla Ciclista
-CREATE TABLE IF NOT EXISTS Ciclista (
-    id SERIAL PRIMARY KEY, 
-    nombrec VARCHAR(255) NOT NULL,
-    nacion VARCHAR(255) NOT NULL,
-    fnac DATE NOT NULL
-);
+-- VACIAR TODAS LAS TABLAS RESPETANDO LAS DEPENDENCIAS
+TRUNCATE TABLE Participa RESTART IDENTITY CASCADE;
+TRUNCATE TABLE Gana RESTART IDENTITY CASCADE;
+TRUNCATE TABLE Pertenece RESTART IDENTITY CASCADE;
+TRUNCATE TABLE Prueba RESTART IDENTITY CASCADE;
+TRUNCATE TABLE Equipo RESTART IDENTITY CASCADE;
+TRUNCATE TABLE Ciclista RESTART IDENTITY CASCADE;
 
--- Tabla Equipo
-CREATE TABLE IF NOT EXISTS Equipo (
-    id SERIAL PRIMARY KEY,
-    nombree VARCHAR(255) NOT NULL,
-    nacion VARCHAR(255) NOT NULL,
-    direct VARCHAR(255) NOT NULL
-);
-
--- Tabla Prueba
-CREATE TABLE IF NOT EXISTS Prueba (
-    id SERIAL PRIMARY KEY,
-    nombrep VARCHAR(255) NOT NULL,
-    año INT NOT NULL,
-    etapas INT NOT NULL,
-    km DOUBLE PRECISION NOT NULL 
-);
-
--- Tabla Pertenece 
-CREATE TABLE IF NOT EXISTS Pertenece (
-    id SERIAL PRIMARY KEY,
-    inicio DATE NOT NULL,
-    fin DATE,
-    ciclista_id BIGINT NOT NULL,
-    equipo_id BIGINT NOT NULL,
-    CONSTRAINT FK_Pertenece_Ciclista FOREIGN KEY (ciclista_id) REFERENCES Ciclista(id) ON DELETE CASCADE,
-    CONSTRAINT FK_Pertenece_Equipo FOREIGN KEY (equipo_id) REFERENCES Equipo(id) ON DELETE CASCADE
-);
-
--- Tabla Gana 
-CREATE TABLE IF NOT EXISTS Gana (
-    id SERIAL PRIMARY KEY,
-    ciclista_id BIGINT NOT NULL,
-    prueba_id BIGINT NOT NULL,
-    CONSTRAINT FK_Gana_Ciclista FOREIGN KEY (ciclista_id) REFERENCES Ciclista(id) ON DELETE CASCADE,
-    CONSTRAINT FK_Gana_Prueba FOREIGN KEY (prueba_id) REFERENCES Prueba(id) ON DELETE CASCADE
-);
-
--- Tabla Participa 
-CREATE TABLE IF NOT EXISTS Participa (
-    id SERIAL PRIMARY KEY,
-    puesto INT NOT NULL,
-    ciclista_id BIGINT NOT NULL,
-    prueba_id BIGINT NOT NULL,
-    CONSTRAINT FK_Participa_Ciclista FOREIGN KEY (ciclista_id) REFERENCES Ciclista(id) ON DELETE CASCADE,
-    CONSTRAINT FK_Participa_Prueba FOREIGN KEY (prueba_id) REFERENCES Prueba(id) ON DELETE CASCADE
-);
-
--- INSERTS PARA LA TABLA CICLISTA 
+-- INSERTS PARA LA TABLA CICLISTA (20 registros)
 INSERT INTO Ciclista (nombrec, nacion, fnac) VALUES 
 ('Juan Pérez', 'España', '1990-05-15'),
 ('Mario López', 'México', '1985-07-20'),
@@ -76,7 +29,7 @@ INSERT INTO Ciclista (nombrec, nacion, fnac) VALUES
 ('Roberto Castillo', 'México', '1984-07-14'),
 ('Andrea Herrera', 'Chile', '1995-05-29');
 
--- INSERTS PARA LA TABLA EQUIPO 
+-- INSERTS PARA LA TABLA EQUIPO (20 registros)
 INSERT INTO Equipo (nombree, nacion, direct) VALUES 
 ('Movistar', 'España', 'Luis Martínez'),
 ('INEOS', 'Reino Unido', 'Carlos Ruiz'),
@@ -99,7 +52,7 @@ INSERT INTO Equipo (nombree, nacion, direct) VALUES
 ('B&B Hotels', 'Francia', 'Charles Petit'),
 ('BikeExchange-Jayco', 'Australia', 'Chris Walker');
 
--- INSERTS PARA LA TABLA PRUEBA 
+-- INSERTS PARA LA TABLA PRUEBA (20 registros)
 INSERT INTO Prueba (nombrep, año, etapas, km) VALUES 
 ('Tour de Francia', 2024, 21, 3400.5),
 ('Giro de Italia', 2023, 20, 3200.0),
@@ -122,7 +75,7 @@ INSERT INTO Prueba (nombrep, año, etapas, km) VALUES
 ('Tirreno-Adriático', 2023, 7, 1000.0),
 ('Tour Down Under', 2023, 5, 700.0);
 
--- INSERTS PARA LA TABLA PERTENECE 
+-- INSERTS PARA LA TABLA PERTENECE (20 registros)
 INSERT INTO Pertenece (inicio, fin, ciclista_id, equipo_id) VALUES 
 ('2018-01-01', '2020-12-31', 1, 1),
 ('2021-01-01', NULL, 2, 2),
@@ -145,7 +98,7 @@ INSERT INTO Pertenece (inicio, fin, ciclista_id, equipo_id) VALUES
 ('2017-01-01', NULL, 19, 19),
 ('2022-01-01', NULL, 20, 20);
 
--- INSERTS PARA LA TABLA GANA 
+-- INSERTS PARA LA TABLA GANA (20 registros)
 INSERT INTO Gana (ciclista_id, prueba_id) VALUES 
 (1, 1),
 (2, 2),
@@ -168,7 +121,7 @@ INSERT INTO Gana (ciclista_id, prueba_id) VALUES
 (19, 19),
 (20, 20);
 
--- INSERTS PARA LA TABLA PARTICIPA 
+-- INSERTS PARA LA TABLA PARTICIPA (20 registros)
 INSERT INTO Participa (puesto, ciclista_id, prueba_id) VALUES 
 (1, 1, 1),
 (2, 2, 2),

@@ -17,7 +17,13 @@ Content-Type: application/json
 ###
 
 ## Obtener equipos ordenados por nombre de forma descendente
-GET http://localhost:8090/api/v1/equipos/nombre/ar/orden/desc
+GET http://localhost:8090/api/v1/equipos/nombre/E/orden/desc
+Content-Type: application/json
+
+###
+
+##
+DELETE http://localhost:8090/api/v1/equipos/1
 Content-Type: application/json
 
 ###

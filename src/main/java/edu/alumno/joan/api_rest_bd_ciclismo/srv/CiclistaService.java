@@ -25,4 +25,6 @@ public interface CiclistaService {
     PaginaDTO<CiclistaListDTO> findByNombreContaining(String nombre, Pageable paging);
 
     PaginaDTO<CiclistaListDTO> findAll(List<FiltroBusqueda> listaFiltros, Pageable paging);
+    
+    boolean deleteCiclistaById(Long id);
 }

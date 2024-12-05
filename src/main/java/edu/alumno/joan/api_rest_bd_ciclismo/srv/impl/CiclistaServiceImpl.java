@@ -32,7 +32,7 @@ public class CiclistaServiceImpl implements CiclistaService {
     @Override
     public CiclistaInfoDTO getCiclistaInfoById(Long id) {
         CiclistaDB ciclista = ciclistaRepository.findById(id)
-                .orElseThrow(() -> new CiclistaNotFoundExcepcion("CIUDAD NOT FOUND", "Ciclista no encontrado: " + id));
+                .orElseThrow(() -> new CiclistaNotFoundExcepcion("CICLISTA NOT FOUND", "Ciclista no encontrado: " + id));
         return CiclistaMapper.INSTANCE.ciclistaToCiclistaInfoDTO(ciclista);
     }
 
@@ -88,5 +88,14 @@ public class CiclistaServiceImpl implements CiclistaService {
                 paginaCiclistas.getTotalPages(),
                 CiclistaMapper.INSTANCE.ciclistasToCiclistaListDTOs(paginaCiclistas.getContent()),
                 paginaCiclistas.getSort());
+    }
+
+    public boolean deleteCiclistaById(Long id) {
+        if (ciclistaRepository.existsById(id)) {
+            ciclistaRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
