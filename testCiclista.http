@@ -22,7 +22,19 @@ Content-Type: application/json
 
 ###
 
-##
+## Crear un nuevo ciclista
+POST http://localhost:8090/api/v1/ciclistas
+Content-Type: application/json
+
+{
+  "nombre": "Joan Benavent",
+  "nacion": "España",
+  "fechaNacimiento": "1995-07-20"
+}
+
+###
+
+## Eliminar ciclista por ID
 DELETE http://localhost:8090/api/v1/ciclistas/1
 Content-Type: application/json
 

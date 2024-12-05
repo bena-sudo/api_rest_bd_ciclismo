@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import edu.alumno.joan.api_rest_bd_ciclismo.model.db.CiclistaDB;
+import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.CiclistaEditDTO;
 import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.CiclistaInfoDTO;
 import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.CiclistaListDTO;
 import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.FiltroBusqueda;
@@ -32,7 +33,8 @@ public class CiclistaServiceImpl implements CiclistaService {
     @Override
     public CiclistaInfoDTO getCiclistaInfoById(Long id) {
         CiclistaDB ciclista = ciclistaRepository.findById(id)
-                .orElseThrow(() -> new CiclistaNotFoundExcepcion("CICLISTA NOT FOUND", "Ciclista no encontrado: " + id));
+                .orElseThrow(
+                        () -> new CiclistaNotFoundExcepcion("CICLISTA NOT FOUND", "Ciclista no encontrado: " + id));
         return CiclistaMapper.INSTANCE.ciclistaToCiclistaInfoDTO(ciclista);
     }
 
@@ -88,6 +90,12 @@ public class CiclistaServiceImpl implements CiclistaService {
                 paginaCiclistas.getTotalPages(),
                 CiclistaMapper.INSTANCE.ciclistasToCiclistaListDTOs(paginaCiclistas.getContent()),
                 paginaCiclistas.getSort());
+    }
+
+    @Override
+    public CiclistaEditDTO createCiclista(CiclistaEditDTO ciclistaEditDTO) {
+        return CiclistaMapper.INSTANCE.ciclistaToCiclistaEditDTO(
+                ciclistaRepository.save(CiclistaMapper.INSTANCE.ciclistaEditToCiclistaDB(ciclistaEditDTO)));
     }
 
     public boolean deleteCiclistaById(Long id) {

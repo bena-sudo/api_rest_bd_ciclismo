@@ -6,6 +6,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import edu.alumno.joan.api_rest_bd_ciclismo.model.db.CiclistaDB;
+import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.CiclistaEditDTO;
 import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.CiclistaInfoDTO;
 import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.CiclistaListDTO;
 
@@ -17,6 +18,10 @@ public interface CiclistaMapper {
 
     // Mapear de entidad Ciclista a DTO para listas
     CiclistaListDTO ciclistaToCiclistaListDTO(CiclistaDB ciclista);
+
+    CiclistaEditDTO ciclistaToCiclistaEditDTO(CiclistaDB ciclistaDB);
+
+    CiclistaDB ciclistaEditToCiclistaDB (CiclistaEditDTO ciclistaEditDTO);
 
     // Mapear lista de Ciclista a lista de CiclistaListDTO
     List<CiclistaListDTO> ciclistasToCiclistaListDTOs(List<CiclistaDB> ciclistas);

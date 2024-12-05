@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.lang.NonNull;
 
+import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.CiclistaEditDTO;
 import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.CiclistaInfoDTO;
 import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.CiclistaListDTO;
 import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.FiltroBusqueda;
@@ -26,5 +27,7 @@ public interface CiclistaService {
 
     PaginaDTO<CiclistaListDTO> findAll(List<FiltroBusqueda> listaFiltros, Pageable paging);
     
+    CiclistaEditDTO createCiclista(CiclistaEditDTO ciclistaEditDTO);
+
     boolean deleteCiclistaById(Long id);
 }

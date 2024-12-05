@@ -10,18 +10,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.alumno.joan.api_rest_bd_ciclismo.helper.FiltroBusquedaHelper;
 import edu.alumno.joan.api_rest_bd_ciclismo.helper.PaginationHelper;
+import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.CiclistaEditDTO;
 import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.CiclistaInfoDTO;
 import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.CiclistaListDTO;
 import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.FiltroBusqueda;
 import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.ListadoRespuestaDTO;
 import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.PaginaDTO;
 import edu.alumno.joan.api_rest_bd_ciclismo.srv.CiclistaService;
+import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -75,6 +80,12 @@ public class CiclistaRestController {
             @PathVariable("direccionOrden") String direccionOrden) {
         return ciclistaService.findAllCiclistasByNombre(nombre, Sort.by(Direction.fromString(direccionOrden), "nombre"));
     }
+
+    @PostMapping("/ciclistas")
+    public CiclistaEditDTO createCiclista(@Valid @RequestBody CiclistaEditDTO ciclistaEditDTO) {
+        return ciclistaService.createCiclista(ciclistaEditDTO);
+    }
+    
 
     @DeleteMapping("/ciclistas/{id}")
     public ResponseEntity<String> deleteCiclistaById(@PathVariable("id") Long id) {

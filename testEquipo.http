@@ -22,7 +22,7 @@ Content-Type: application/json
 
 ###
 
-##
+## Eliminar equipo por ID
 DELETE http://localhost:8090/api/v1/equipos/1
 Content-Type: application/json
 
