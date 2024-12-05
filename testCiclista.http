@@ -34,6 +34,18 @@ Content-Type: application/json
 
 ###
 
+## Editar un ciclista
+PUT http://localhost:8090/api/v1/ciclistas/1
+Content-Type: application/json
+
+{
+  "nombre": "Alejandro Valverde",
+  "nacion": "España",
+  "fechaNacimiento": "1980-04-25"
+}
+
+###
+
 ## Eliminar ciclista por ID
 DELETE http://localhost:8090/api/v1/ciclistas/1
 Content-Type: application/json

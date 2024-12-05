@@ -1,6 +1,7 @@
 package edu.alumno.joan.api_rest_bd_ciclismo.srv;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -28,6 +29,8 @@ public interface CiclistaService {
     PaginaDTO<CiclistaListDTO> findAll(List<FiltroBusqueda> listaFiltros, Pageable paging);
     
     CiclistaEditDTO createCiclista(CiclistaEditDTO ciclistaEditDTO);
+
+    Optional<CiclistaEditDTO> updateCiclista(CiclistaEditDTO ciclistaEditDTO);
 
     boolean deleteCiclistaById(Long id);
 }

@@ -14,6 +14,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import edu.alumno.joan.api_rest_bd_ciclismo.model.db.CiclistaDB;
 import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.CiclistaEditDTO;
@@ -98,6 +99,18 @@ public class CiclistaServiceImpl implements CiclistaService {
                 ciclistaRepository.save(CiclistaMapper.INSTANCE.ciclistaEditToCiclistaDB(ciclistaEditDTO)));
     }
 
+    @Override
+    public Optional<CiclistaEditDTO> updateCiclista(CiclistaEditDTO ciclistaEditDTO) {
+        Optional<CiclistaDB> ciclistaOptional = ciclistaRepository.findById(ciclistaEditDTO.getId());
+        if (ciclistaOptional.isPresent()) {
+            CiclistaDB ciclistaDB = ciclistaOptional.get();
+            CiclistaMapper.INSTANCE.updateCiclistaFromCiclistaEditDTO(ciclistaEditDTO, ciclistaDB);
+            return Optional.of(CiclistaMapper.INSTANCE.ciclistaToCiclistaEditDTO(ciclistaRepository.save(ciclistaDB)));
+        }
+        return Optional.empty();
+    }
+
+    @Override
     public boolean deleteCiclistaById(Long id) {
         if (ciclistaRepository.existsById(id)) {
             ciclistaRepository.deleteById(id);

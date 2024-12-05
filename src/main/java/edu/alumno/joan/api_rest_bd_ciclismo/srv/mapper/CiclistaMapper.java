@@ -12,6 +12,8 @@ import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.CiclistaListDTO;
 
 import java.util.List;
 
+import org.mapstruct.MappingTarget;
+
 @Mapper
 public interface CiclistaMapper {
     CiclistaMapper INSTANCE = Mappers.getMapper(CiclistaMapper.class);
@@ -30,4 +32,6 @@ public interface CiclistaMapper {
     @Mapping(target = "equipos", source = "equipos") // Relacionados con Pertenece
     @Mapping(target = "pruebas", source = "participaciones") // Relacionados con Participa
     CiclistaInfoDTO ciclistaToCiclistaInfoDTO(CiclistaDB ciclista);
+
+    void updateCiclistaFromCiclistaEditDTO(CiclistaEditDTO ciclistaEditDTO, @MappingTarget CiclistaDB ciclistaDB);
 }
