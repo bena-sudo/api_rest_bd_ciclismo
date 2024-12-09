@@ -2,6 +2,7 @@ package edu.alumno.joan.api_rest_bd_ciclismo.srv.impl;
 
 import edu.alumno.joan.api_rest_bd_ciclismo.repository.EquipoRepository;
 import edu.alumno.joan.api_rest_bd_ciclismo.srv.EquipoService;
+import edu.alumno.joan.api_rest_bd_ciclismo.srv.mapper.CiclistaMapper;
 import edu.alumno.joan.api_rest_bd_ciclismo.srv.mapper.EquipoMapper;
 import edu.alumno.joan.api_rest_bd_ciclismo.srv.specification.FiltroBusquedaSpecification;
 
@@ -14,8 +15,12 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
+import edu.alumno.joan.api_rest_bd_ciclismo.model.db.CiclistaDB;
 import edu.alumno.joan.api_rest_bd_ciclismo.model.db.EquipoDB;
+import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.CiclistaEditDTO;
+import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.EquipoEditDTO;
 import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.EquipoInfoDTO;
 import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.EquipoListDTO;
 import edu.alumno.joan.api_rest_bd_ciclismo.model.dto.FiltroBusqueda;
@@ -88,6 +93,22 @@ public class EquipoServiceImpl implements EquipoService {
                 paginaEquipos.getTotalPages(),
                 EquipoMapper.INSTANCE.equiposToEquipoListDTOs(paginaEquipos.getContent()),
                 paginaEquipos.getSort());
+    }
+
+    @Override
+    public EquipoEditDTO createEquipo(EquipoEditDTO equipoEditDTO) {
+        return  EquipoMapper.INSTANCE.equipoToEquipoEditDTO(equipoRepository.save(EquipoMapper.INSTANCE.equipoEditToEquipoDB(equipoEditDTO)));
+    }
+
+    @Override
+    public Optional<EquipoEditDTO> updateEquipo(EquipoEditDTO equipoEditDTO) {
+        Optional<EquipoDB> equipoOptional = equipoRepository.findById(equipoEditDTO.getId());
+        if (equipoOptional.isPresent()) {
+            EquipoDB equipoDB = equipoOptional.get();
+            EquipoMapper.INSTANCE.updateEquipoFromEquipoEditDTO(equipoEditDTO, equipoDB);
+            return Optional.of(EquipoMapper.INSTANCE.equipoToEquipoEditDTO(equipoRepository.save(equipoDB)));
+        }
+        return Optional.empty();
     }
 
     public boolean deleteEquipoById(Long id) {

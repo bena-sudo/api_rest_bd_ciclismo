@@ -22,6 +22,30 @@ Content-Type: application/json
 
 ###
 
+## Crear un nuevo equipo
+POST http://localhost:8090/api/v1/equipos
+Content-Type: application/json
+
+{
+  "nombre": "BENAVENTES",
+  "nacion": "España",
+  "director": "Joan Benavent"
+}
+
+###
+
+## Editar un equipo
+PUT http://localhost:8090/api/v1/equipos/1
+Content-Type: application/json
+
+{
+  "nombre": "BENAVENTES",
+  "nacion": "España",
+  "director": "Joan Benavent"
+}
+
+###
+
 ## Eliminar equipo por ID
 DELETE http://localhost:8090/api/v1/equipos/1
 Content-Type: application/json
