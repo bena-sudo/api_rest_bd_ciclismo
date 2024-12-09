@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -35,8 +37,9 @@ public class CiclistaDB {
     @Column(name = "fnac", nullable = false)
     private LocalDate fechaNacimiento;
 
-    @OneToMany(mappedBy = "ciclista", cascade = CascadeType.ALL)
-    private List<PerteneceDB> equipos;
+    @ManyToOne
+    @JoinColumn(name = "equipo_id")
+    private EquipoDB equipo;
 
     @OneToMany(mappedBy = "ciclista", cascade = CascadeType.ALL)
     private List<GanaDB> pruebasGanadas;

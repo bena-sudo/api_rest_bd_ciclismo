@@ -18,6 +18,7 @@ public class CiclistaInfoDTO implements Serializable {
     private String nacion;
     private LocalDate fechaNacimiento;
 
-    private List<PerteneceDTO> equipos;
+    
+    private EquipoInfoDTO equipo;
     private List<ParticipaDTO> pruebas;
 }

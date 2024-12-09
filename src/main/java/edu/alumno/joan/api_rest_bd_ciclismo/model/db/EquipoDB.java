@@ -35,6 +35,6 @@ public class EquipoDB {
     private String director;
 
     @OneToMany(mappedBy = "equipo", cascade = CascadeType.ALL)
-    private List<PerteneceDB> ciclistas;
+    private List<CiclistaDB> ciclistas;
 
 }

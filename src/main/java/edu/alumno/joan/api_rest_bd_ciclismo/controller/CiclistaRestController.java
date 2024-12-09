@@ -46,7 +46,7 @@ public class CiclistaRestController {
             @RequestParam(required = false) String[] filter,
             @RequestParam(required = false) String nombre,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "3") int size,
+            @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id,asc") String[] sort) {
 
         List<FiltroBusqueda> listaFiltros = FiltroBusquedaHelper.createFiltroBusqueda(filter);

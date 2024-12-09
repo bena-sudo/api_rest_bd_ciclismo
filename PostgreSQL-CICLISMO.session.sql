@@ -3,7 +3,9 @@ CREATE TABLE IF NOT EXISTS Ciclista (
     id SERIAL PRIMARY KEY, 
     nombrec VARCHAR(255) NOT NULL,
     nacion VARCHAR(255) NOT NULL,
-    fnac DATE NOT NULL
+    fnac DATE NOT NULL,
+    equipo_id BIGINT NOT NULL,
+    CONSTRAINT FK_Ciclista_Equipo FOREIGN KEY (equipo_id) REFERENCES Equipo(id)
 );
 
 -- Tabla Equipo
@@ -21,17 +23,6 @@ CREATE TABLE IF NOT EXISTS Prueba (
     año INT NOT NULL,
     etapas INT NOT NULL,
     km DOUBLE PRECISION NOT NULL 
-);
-
--- Tabla Pertenece 
-CREATE TABLE IF NOT EXISTS Pertenece (
-    id SERIAL PRIMARY KEY,
-    inicio DATE NOT NULL,
-    fin DATE,
-    ciclista_id BIGINT NOT NULL,
-    equipo_id BIGINT NOT NULL,
-    CONSTRAINT FK_Pertenece_Ciclista FOREIGN KEY (ciclista_id) REFERENCES Ciclista(id) ON DELETE CASCADE,
-    CONSTRAINT FK_Pertenece_Equipo FOREIGN KEY (equipo_id) REFERENCES Equipo(id) ON DELETE CASCADE
 );
 
 -- Tabla Gana 
@@ -54,27 +45,27 @@ CREATE TABLE IF NOT EXISTS Participa (
 );
 
 -- INSERTS PARA LA TABLA CICLISTA 
-INSERT INTO Ciclista (nombrec, nacion, fnac) VALUES 
-('Juan Pérez', 'España', '1990-05-15'),
-('Mario López', 'México', '1985-07-20'),
-('Ana Gómez', 'Colombia', '1992-09-10'),
-('Luis García', 'España', '1995-03-10'),
-('Carlos Hernández', 'Argentina', '1988-12-25'),
-('Diego Rivera', 'Chile', '1993-07-01'),
-('Paula Martínez', 'Uruguay', '1991-11-11'),
-('Rosa Sánchez', 'Perú', '1994-06-21'),
-('Fernando Álvarez', 'Ecuador', '1987-09-30'),
-('Martina Torres', 'Colombia', '1990-02-15'),
-('Santiago Paredes', 'España', '1985-08-09'),
-('Laura Gómez', 'México', '1997-10-12'),
-('Ricardo Díaz', 'Chile', '1992-04-05'),
-('Isabel Ramírez', 'Argentina', '1989-11-19'),
-('Miguel Ángel', 'Colombia', '1986-02-20'),
-('Julia Fernández', 'Perú', '1998-03-23'),
-('Tomás Morales', 'Uruguay', '1993-12-31'),
-('Camila Rojas', 'España', '1990-01-07'),
-('Roberto Castillo', 'México', '1984-07-14'),
-('Andrea Herrera', 'Chile', '1995-05-29');
+INSERT INTO Ciclista (nombrec, nacion, fnac, equipo_id) VALUES 
+('Juan Pérez', 'España', '1990-05-15',1),
+('Mario López', 'México', '1985-07-20',2),
+('Ana Gómez', 'Colombia', '1992-09-10',3),
+('Luis García', 'España', '1995-03-10',4),
+('Carlos Hernández', 'Argentina', '1988-12-25',5),
+('Diego Rivera', 'Chile', '1993-07-01',6),
+('Paula Martínez', 'Uruguay', '1991-11-11',7),
+('Rosa Sánchez', 'Perú', '1994-06-21',8),
+('Fernando Álvarez', 'Ecuador', '1987-09-30',9),
+('Martina Torres', 'Colombia', '1990-02-15',10),
+('Santiago Paredes', 'España', '1985-08-09',1),
+('Laura Gómez', 'México', '1997-10-12',1),
+('Ricardo Díaz', 'Chile', '1992-04-05',2),
+('Isabel Ramírez', 'Argentina', '1989-11-19',3),
+('Miguel Ángel', 'Colombia', '1986-02-20',4),
+('Julia Fernández', 'Perú', '1998-03-23',5),
+('Tomás Morales', 'Uruguay', '1993-12-31',6),
+('Camila Rojas', 'España', '1990-01-07',7),
+('Roberto Castillo', 'México', '1984-07-14',8),
+('Andrea Herrera', 'Chile', '1995-05-29',9);
 
 -- INSERTS PARA LA TABLA EQUIPO 
 INSERT INTO Equipo (nombree, nacion, direct) VALUES 
@@ -121,29 +112,6 @@ INSERT INTO Prueba (nombrep, año, etapas, km) VALUES
 ('Volta a Catalunya', 2024, 7, 1100.0),
 ('Tirreno-Adriático', 2023, 7, 1000.0),
 ('Tour Down Under', 2023, 5, 700.0);
-
--- INSERTS PARA LA TABLA PERTENECE 
-INSERT INTO Pertenece (inicio, fin, ciclista_id, equipo_id) VALUES 
-('2018-01-01', '2020-12-31', 1, 1),
-('2021-01-01', NULL, 2, 2),
-('2015-01-01', NULL, 3, 3),
-('2019-01-01', '2023-12-31', 4, 4),
-('2020-01-01', NULL, 5, 5),
-('2022-01-01', NULL, 6, 6),
-('2017-01-01', '2019-12-31', 7, 7),
-('2018-06-01', '2020-06-30', 8, 8),
-('2020-07-01', NULL, 9, 9),
-('2016-01-01', '2018-12-31', 10, 10),
-('2019-01-01', NULL, 11, 11),
-('2021-01-01', NULL, 12, 12),
-('2015-01-01', '2020-12-31', 13, 13),
-('2022-01-01', NULL, 14, 14),
-('2023-01-01', NULL, 15, 15),
-('2020-01-01', '2023-12-31', 16, 16),
-('2019-01-01', NULL, 17, 17),
-('2018-01-01', NULL, 18, 18),
-('2017-01-01', NULL, 19, 19),
-('2022-01-01', NULL, 20, 20);
 
 -- INSERTS PARA LA TABLA GANA 
 INSERT INTO Gana (ciclista_id, prueba_id) VALUES 

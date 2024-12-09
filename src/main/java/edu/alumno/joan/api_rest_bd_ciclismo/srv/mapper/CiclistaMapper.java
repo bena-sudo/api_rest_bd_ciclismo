@@ -29,7 +29,6 @@ public interface CiclistaMapper {
     List<CiclistaListDTO> ciclistasToCiclistaListDTOs(List<CiclistaDB> ciclistas);
 
     // Mapear de entidad Ciclista a DTO para información detallada
-    @Mapping(target = "equipos", source = "equipos") // Relacionados con Pertenece
     @Mapping(target = "pruebas", source = "participaciones") // Relacionados con Participa
     CiclistaInfoDTO ciclistaToCiclistaInfoDTO(CiclistaDB ciclista);
 
